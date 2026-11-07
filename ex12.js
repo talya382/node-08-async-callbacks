@@ -17,3 +17,12 @@ const path = require("path");
 const filePath = path.join(__dirname, "notes.txt");
 
 // write your code here
+fs.access(filePath, fs.constants.F_OK, (err) => {
+  if (err === null) {
+    if (path.extname(filePath) === ".txt") {
+      console.log("notes.txt is a .txt file.");
+    }
+  } else if (err.code === "ENOENT") {
+    console.log("File not found.");
+  }
+});
