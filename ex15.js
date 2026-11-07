@@ -14,5 +14,18 @@ const fs = require("fs");
 const path = require("path");
 
 const filePath = path.join(__dirname, "data.txt");
-
+const data="Hello Node.js"
 // write your code here
+fs.access(filePath, fs.constants.F_OK, (err) => {
+  if (err === null) {
+       console.log("File already exists.");
+  } else if (err.code === "ENOENT") {
+     fs.writeFile(filePath, data, (err)=>{
+    if(err) throw err;
+     console.log(" File created successfully.");
+   })
+  
+  }else {
+    throw err;
+}
+});
